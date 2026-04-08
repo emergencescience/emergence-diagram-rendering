@@ -21,6 +21,18 @@ def render_local(engine, code, format="png", run_id=None, template_data=None):
     run_dir = base_dir / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
     
+    # Binary Check
+    binary = {"mermaid": "mmdc", "d2": "d2", "graphviz": "dot"}.get(engine)
+    if not sh.which(binary):
+        result = {
+            "status": "fallback_suggested",
+            "message": f"Local renderer '{binary}' not found. Please use the 'render' tool (Cloud API) or run 'make install'.",
+            "run_dir": str(run_dir)
+        }
+        with open(run_dir / "metadata.json", "w") as f:
+            json.dump(result, f, indent=2)
+        return result
+
     # Files
     ext = {"mermaid": "mmd", "d2": "d2", "graphviz": "dot"}.get(engine, "txt")
     tmp_input = run_dir / f"input.{ext}"
