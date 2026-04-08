@@ -47,11 +47,15 @@ else
 fi
 
 # 4. Install Python Dependencies
-if [[ "$VIRTUAL_ENV" != "" ]] || [[ "$PLATFORM" == "Linux" ]]; then
-    echo "Installing python requirements..."
-    pip install -r requirements.txt
-else
-    echo "Warning: No virtualenv detected. Skipping pip install to protect host OS."
+echo "Setting up Python virtual environment..."
+if [[ ! -d ".venv" ]]; then
+    python3 -m venv .venv
+    echo "Virtual environment created."
 fi
 
+# Use the local venv's pip
+./.venv/bin/pip install --upgrade pip
+./.venv/bin/pip install -r requirements.txt
+
 echo "--- Local-First Skill Environment Ready ---"
+echo "Note: Always run rendering scripts using './.venv/bin/python3 scripts/local_render.py'"
