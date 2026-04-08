@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant User as {{User}}
+    participant App as {{App}}
+    participant Auth as {{AuthService}}
+
+    User->>App: Login Request (API Key)
+    App->>Auth: Authenticate(API Key)
+    Auth-->>App: Challenge Required
+    App-->>User: Show MFA Prompt
+    User->>App: Submit MFA Code
+    App->>Auth: Verify MFA(Code)
+    Auth-->>App: Success (JWT)
+    App-->>User: Welcome Screen

@@ -1,0 +1,19 @@
+graph TD
+    Start(User Query) --> Check{Agent Mode?}
+    Check -->|Dumb| Template(Use Template)
+    Check -->|Smart| LLM(Generate Code)
+    
+    Template --> Render{Local Tool?}
+    LLM --> Render
+    
+    Render -->|Yes| Local(Render Local Binary)
+    Render -->|No| Cloud(Call Emergence API)
+    
+    Local --> Result(Success)
+    Cloud --> Result
+    
+    Result --> Verify{Valid?}
+    Verify -->|No| Fix(Refine & Retry)
+    Verify -->|Yes| End(Final Diagram)
+    
+    Fix --> Check

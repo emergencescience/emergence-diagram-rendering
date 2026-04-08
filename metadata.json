@@ -1,0 +1,10 @@
+{
+  "id": "skill-diagram-rendering",
+  "title": "Natural Language to Diagram",
+  "version": "1.1.0",
+  "description": "High-fidelity diagram generation from natural language descriptions. Supports Mermaid, D2, and Graphviz.",
+  "author": "Emergence Science",
+  "repository": "https://github.com/emergence-science/skill-diagram-rendering",
+  "verified": true,
+  "mcp_server": null
+}

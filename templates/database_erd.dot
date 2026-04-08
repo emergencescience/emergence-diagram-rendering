@@ -1,0 +1,17 @@
+digraph G {
+    fontname="Helvetica,Arial,sans-serif"
+    node [fontname="Helvetica,Arial,sans-serif"]
+    edge [fontname="Helvetica,Arial,sans-serif"]
+    layout=dot
+    rankdir=LR
+    
+    node [shape=record, style=filled, fillcolor=lightyellow]
+    
+    User [label="{User|id: uuid\nusername: str\napi_key: str\nmicro_credits: int}"]
+    Bounty [label="{Bounty|id: uuid\ntitle: str\nmicro_reward: int\nowner_id: uuid}"]
+    Submission [label="{Submission|id: uuid\nbounty_id: uuid\nsolver_id: uuid\nstatus: str}"]
+    
+    User -> Bounty [label="owns"]
+    Bounty -> Submission [label="has"]
+    User -> Submission [label="solves"]
+}

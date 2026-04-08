@@ -1,0 +1,44 @@
+direction: right
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme: 200
+  }
+}
+
+Cloud: {
+  shape: cloud
+  icon: aws
+  
+  VPC: {
+    PublicSubnet: {
+      ALB: {
+        shape: oval
+        icon: load-balancer
+      }
+    }
+    
+    PrivateSubnet: {
+      Orchestrator: {
+        shape: square
+        icon: server
+        {{AppName}}
+      }
+      
+      Database: {
+        shape: cylinder
+        icon: database
+        Postgres
+      }
+    }
+    
+    PublicSubnet.ALB -> PrivateSubnet.Orchestrator: Proxy
+    PrivateSubnet.Orchestrator -> PrivateSubnet.Database: SQL
+  }
+}
+
+User: {
+  shape: person
+}
+
+User -> Cloud.VPC.PublicSubnet.ALB: HTTPS
